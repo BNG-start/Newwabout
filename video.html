@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidéo "Nous Deux"</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Animation d'entrée rapide */
+        .fade-in-quick {
+            animation: quickAppear 0.6s ease-out forwards;
+        }
+
+        @keyframes quickAppear {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 350px; /* Largeur idéale pour mobile */
+            aspect-ratio: 9 / 16; /* Format TikTok/Vertical */
+            border-radius: 20px;
+            overflow: hidden;
+            /* Suppression des bordures noires et ajout d'une ombre douce */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: transparent; 
+            border: none;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            /* L'élément clé pour enlever les bandes noires sur les côtés */
+            object-fit: cover; 
+            display: block;
+        }
+
+        .heart {
+            font-size: 45px;
+            color: #ff4d6d;
+            margin-top: 15px;
+            animation: heartbeat 1.2s infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.5));
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            40% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Masquer le lecteur audio pour le style */
+        .audio-player {
+            display: none;
+        }
+
+        @media (max-height: 700px) {
+            .video-container {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in-quick">
+        
+        <div class="video-container">
+            <video id="video" autoplay loop playsinline>
+                <source src="videocouple.mp4" type="video/mp4">
+                Votre navigateur ne prend pas en charge la vidéo.
+            </video>
+        </div>
+
+        <div class="audio-player">
+            <audio id="bg-music" loop>
+                <source src="videocouple.mp3" type="audio/mp3">
+            </audio>
+        </div>
+
+        <div class="heart">
+            <span>&#10084;</span>
+        </div>
+    </div>
+
+    <script>
+        // Lance la vidéo et la musique au premier toucher de l'écran
+        document.body.addEventListener('click', function() {
+            const v = document.getElementById('video');
+            const a = document.getElementById('bg-music');
+            v.muted = false; // Active le son de la vidéo si elle était coupée
+            v.play();
+            a.play();
+        }, { once: true });
+    </script>
+</body>
+</html>

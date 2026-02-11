@@ -1,0 +1,183 @@
+/* --- Variables et Reset --- */
+:root {
+    --primary-color: #ff4d6d;
+    --yes-color: #2ecc71;
+    --no-color: #e74c3c;
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- Conteneur Principal --- */
+.container {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* --- Animation d'entrée du contenu (Slide) --- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.slide-in {
+    animation: slideFromLeft 1.2s ease-out forwards;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- Gestion du GIF local (budu.gif) --- */
+.gif-container1 {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 200px; 
+}
+
+.gif-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    background: transparent;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+
+/* MODIFICATION : Apparition plus rapide au début */
+.delayed-fade {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in forwards;
+    animation-delay: 0.5s; /* Délai réduit pour plus de réactivité */
+}
+
+/* NOUVEAU : Classe pour l'affichage immédiat lors des clics sur "Non" */
+.instant-show {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: scale(1) !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Typographie --- */
+.question p {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    color: white;
+    font-weight: bold;
+    text-shadow: var(--text-shadow);
+    margin-bottom: 30px;
+}
+
+/* --- BOUTONS --- */
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+#oui {
+    background-color: var(--yes-color);
+    color: white;
+    z-index: 10;
+}
+
+#non {
+    background-color: var(--no-color);
+    color: white;
+}
+
+.blink {
+    animation: pulseGlow 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 0px rgba(46, 204, 113, 0.4); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(46, 204, 113, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 0px rgba(46, 204, 113, 0.4); }
+}
+
+/* --- Vidéo Format TikTok --- */
+.video-container {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 9 / 16;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: #000;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Media Queries Mobile --- */
+@media (max-width: 480px) {
+    .buttons {
+        gap: 10px;
+    }
+    
+    button {
+        padding: 12px 20px;
+        font-size: 1.1rem;
+    }
+
+    .gif-container1 {
+        max-width: 280px;
+        min-height: 150px;
+    }
+}
